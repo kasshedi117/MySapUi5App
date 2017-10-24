@@ -1,0 +1,90 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+
+		<title>Mobile App with data-bound List</title>
+
+		<script 
+            src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.m,sap.ui.layout"
+				data-sap-ui-xx-bindingSyntax="complex"
+				data-sap-ui-theme="sap_bluecrystal">
+        </script>
+
+<!--
+<script 
+    id='sap-ui-bootstrap'
+    src='resources/sap-ui-core.js'
+	data-sap-ui-xx-bindingSyntax="complex"
+    data-sap-ui-theme='sap_bluecrystal'
+    data-sap-ui-libs='sap.m, sap.ui.ux3, sap.ui.commons, sap.ui.layout'
+    data-sap-ui-compatVersion='edge'
+    data-sap-ui-preload='async'>
+</script>
+-->
+
+<script>
+     sap.ui.getCore().attachInit(function () {
+         <!--
+         jQuery("#content").html("UI5 is ready");
+         -->
+     });
+</script>
+
+<script>
+    var app = new sap.m.App("MyApp", {});
+
+    var oText1 = new sap.m.Input({value:"", placeholder:"Enter a first name"});
+    var oText2 = new sap.m.Input({value:"", placeholder:"Enter a last name"});
+
+    var page = new sap.m.Page("page", {
+        title: "Hedi's kestouri application",
+        content : [
+            new sap.m.Label ({text: "First Name: "}),
+            oText1,
+            new sap.m.Label ({text: "Last Name: "}),
+            oText2,
+            new sap.m.Button({
+                text : "Submit" ,
+                tap : function(){
+                    sap.ui.getCore().byId("label1").setText("Hallo, " + oText1.getValue() + " " + oText2.getValue());
+                    app.to("page2");
+                } 
+            }),
+        ]
+    });
+
+    app.addPage(page);
+
+    var page2 = new sap.m.Page("page2", {
+        title: "Second page",
+        content : [
+            new sap.m.Label ("label1",{width:"100%",}),
+            new sap.m.Button({ 
+                text :"Go back to First Page", 
+                tap : function(){
+                    app.to("page");
+                }
+            })
+            ]
+    });
+
+    app.addPage(page2);
+
+    app.placeAt("content");
+
+
+</script>
+
+
+
+
+	</head>
+	<body id="content" class="sapUiBody">
+	</body>
+</html>
+
